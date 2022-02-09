@@ -19,119 +19,214 @@ database = []
 init_score = 10
 
 def player_registration():
-    name_entered = input("Enter your name to play: ")
+    name_entered = input("Enter your name to play: ").capitalize()
     if name_entered == "":
         print("You must enter a name to play")
     else:
         database.append(name_entered)
         print("Welcome", name_entered)
         print()
-
-"""
-# Player login 
-def login(database, player_name):
-    if player_name not in database:
-        print("You must be register to play")
-        return ""
-    elif database[player_name] == "":
-        print("Welcome", player_name)
-        return player_name
-
-# Player registration
-def registration(database, player_name):
-    if player_name in database:
-        print("Name already exist. Enter a different name")
-        return ""
-    else:
-        print(player_name, "has been registered")
-        return player_name
-
-"""
-
-# # Dictionary with another dictionary representing the value of the keys. 
-# questions_answers = {"""There are a lot of conspiracies floating around about the assassinations
-#                     of Abraham Lincoln and John Kennedy. Which of the following things is NOT an eerie 
-#                     similarity between the two murders?""" : 
-#                     {"a)" : "Both were shot in a theater", "b)" : "Both had vice presidents named Johnson",
-#                     "c)" : "Both were shot in the head on a Friday", "d)" : "Both were shot by Southern men in their 20s."},
-#                     """Kublai Khan's attempted conquests of Japan and King Philip II's attempted conquest of 
-#                     Britain failed for what reason?""" : 
-#                     {"a)" : "Having their own kingdoms invaded", "b)" : "Bad weather", "c)" : "The deaths of their wives", 
-#                     "d)" : "Plague"}
-#                     }
-
-# correct_answers = {"""There are a lot of conspiracies floating around about the assassinations
-#                     of Abraham Lincoln and John Kennedy. Which of the following things is NOT an eerie 
-#                     similarity between the two murders?""" : "a",
-#                     """Kublai Khan's attempted conquests of Japan and King Philip II's attempted conquest of 
-#                     Britain failed for what reason?""" : "b"
-#                   }
+        return name_entered
 
 questions_answers = ["""There are a lot of conspiracies floating around about the assassinations 
 of Abraham Lincoln and John Kennedy. Which of the following things is NOT an eerie 
-similarity between the two murders?\n
+similarity between the two murders?
  a) Both were shot in a theater.\n b) Both had vice presidents named Johnson.\n c) Both were shot in the head on a Friday.\n d) Both were shot by Southern men in their 20s.\n""",
 """Kublai Khan's attempted conquests of Japan and King Philip II's 
-attempted conquest of Britain failed for what reason?\n
- a) Having their own kingdoms invaded.\n b) Bad weather\n c) The deaths of their wives\n d) Plague\n"""]          
+attempted conquest of Britain failed for what reason?
+ a) Having their own kingdoms invaded.\n b) Bad weather\n c) The deaths of their wives\n d) Plague\n""",
+ """The Great Depression occurred when the stock market crashed in 1929. 
+ However, previous to this event, there was another so-called 'Great Depression' 
+ that began in 1873. By what name do we now refer to that first Great Depression?
+ a) Short Depression\n b) Late Depression\n c) First Depression\n d) Long Depression\n""",
+ """One of the more infamous examples of history repeating itself is when both 
+ Napoleon and Hitler invaded which nation whose cold temperatures killed off 
+ hundreds of thousands of soldiers each instance?\n a) Russia\n b) Canada \n c) England\n d) China""",
+ """Barack Obama was not the first U.S. President whose detractors claimed he was born outside 
+ of the United States. Which president was the first to have this claim made against 
+ him when his opponents claimed he was born in Canada?.\n a) Teddy Roosevelt
+ b) James Garfield\n c) Franklin Pierce\n d) Chester A. Arthur\n""",
+ """In the United States, the red scares of the 20th century were often said 
+ to be (then) modern-day versions of which event that occurred centuries earlier?
+Arthur Miller wrote a play about it\n a) Teapot Dome Scandal\n b) Civil War\n c) Salem Witch Trials
+ d) Nullification Crisis\n""",
+"""Which of these Biblical places was the city where believers of Christ were 
+first called Christians?\n a) Zion\n b) Galilee\n c) New York City\n d) Antioch\n""",
+"""Where did Moses receive the ten commandments?\n a) Jordan River\n b) Nile River 
+ c) Babylon\n d) Mount Sinai\n""",
+"""Which of the following Biblical names means "light-bearer"?
+ a) Aaron\n b) Saul\n c) Lucifer\n d) Satan\n""",
+"""Which nationality describes a very dangerous game and a type of salad 
+dressing often served on deli sandwiches?
+ a) Mongolian\n b) Russian\n c) French\n d) Italian\n"""]
 
-#authorized_player = ""
+"""Which nationality could describe a dessert, a side dish, and a disease?
+ a) German\n b) Russian\n c) Italian\n d) French\n
+"""
+
+correct_answers = {"Question 1" : "a", "Question 2" : "b", "Question 3" : "d",
+  "Question 4" : "a", "Question 5" : "d", "Question 6" : "c" ,"Question 7" : "d" , 
+  "Question 8" : "d" ,"Question 9" : "c", "Question 10" : "b"}    
 
 def pick_question():
-    while len(questions_answers) > 0:
-        for count, value in enumerate(questions_answers, start=1): 
-            print ("Question",(count),":",value)
-            idx_select_question = questions_answers.index(value)
-            player_score = init_score
-            if idx_select_question == 0:
-                selected_answer = input("Enter your answer: ")
-                if selected_answer == "a":
-                    print("\nCorrect answer!")
-                    player_score += 2
-                    print("New score:", player_score, "points\n")
-                    input("Press enter for the next question.")
-                    # return player_score
-                else:
-                    print("\nIncorrect answer!")
-                    player_score -= 1
-                    print("New Score:", player_score, "points\n")
-                    input("Press enter for the next question.")
-                    # return player_score
-                    
-            
-            if idx_select_question == 1:
-                selected_answer = input("Enter your answer: ")
-                if selected_answer == "b":
-                    print("Correct answer!")
-                    player_score += 2
-                    print("Your score is", player_score, "points\n")
-                    input("Press enter for the next question.")
-                    # return player_score
-                    
-                else:
-                    print("\nIncorrect answer ")
-                    player_score -= 1
-                    print("New Score:", player_score, "points\n")
-                    input("Press enter for the next question.")
-                    # return player_score
+    player_score = init_score
+    for counter, value in enumerate(questions_answers, start=1): 
+        print ("Question",(counter),":",value)
+        idx_select_question = questions_answers.index(value)
+        if idx_select_question == 0:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 1"]:
+                print("\nCorrect answer!👍👏")
+                player_score += 2
+                print("New score:", player_score, "points\n")
+                input("Press enter to continue...")
+                # return player_score
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                print("New Score:", player_score, "points\n")
+                input("Press enter to continue...")
+                # return player_score
+        
+        if idx_select_question == 1:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 2"]:
+                print("Correct answer!👍👏")
+                player_score += 2
+                print("Your score is", player_score, "points\n")
+                input("Press enter to continue...")
+                # return player_score
+                
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                print("New Score:", player_score, "points\n")
+                input("Press enter to continue...")
+                # return player_score
 
+        if idx_select_question == 2:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 3"]:
+                print("\nCorrect answer!👍👏")
+                player_score += 2
+                print("New score:", player_score, "points\n")
+                input("Press enter to continue...")
+                # return player_score
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                print("New Score:", player_score, "points\n")
+                input("Press enter to continue...")
+                # return player_score
 
-"""
-def score_tracker(player_name):
-    while player_name is True:
-        player_name == my_score
-        if correct_answer is True:
-            correct_answer = player_init_score + correct_answer
-            print("New score:", correct_answer)
-            return correct_answer
-        elif incorrect_answer is True:
-            incorrect_answer = player_init_score - incorrect_answer
-            print("New score:", incorrect_answer)
-            return incorrect_answer
+        if idx_select_question == 3:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 4"]:
+                print("\nCorrect answer!👍👏")
+                player_score += 2
+                print("New score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                print("New Score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
 
-"""
+        if idx_select_question == 4:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 5"]:
+                print("\nCorrect answer!👍👏")
+                player_score += 2
+                print("New score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                print("New Score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
 
+        if idx_select_question == 5:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 6"]:
+                print("\nCorrect answer!👍👏")
+                player_score += 2
+                print("New score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                print("New Score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
 
+        if idx_select_question == 6:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 7"]:
+                print("\nCorrect answer!👍👏")
+                player_score += 2
+                print("New score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                print("New Score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
+
+        if idx_select_question == 7:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 8"]:
+                print("\nCorrect answer!👍👏")
+                player_score += 2
+                print("New score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                print("New Score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
+
+        if idx_select_question == 8:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 9"]:
+                print("\nCorrect answer!👍👏")
+                player_score += 2
+                print("New score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                print("New Score:", player_score, "points\n")
+                input("Press enter to continue...\n")
+                # return player_score
+
+        if idx_select_question == 9:
+            selected_answer = input("Enter your answer: ").lower()
+            if selected_answer == correct_answers["Question 10"]:
+                print("\nCorrect answer!👍👏")
+                player_score += 2
+                print("New score:", player_score, "points\n")
+                input("Press enter to see your final score...\n")
+                #return player_score
+            else:
+                print("\nIncorrect answer!👎")
+                player_score -= 1
+                input("Press enter to see your final score...\n")
+                #return player_score
+
+    print("Thank you for playing iTrive 🙏")
+    print("Your final score is:", player_score)
+    print("")
+    
 
 show_instruction()
 player_registration()
